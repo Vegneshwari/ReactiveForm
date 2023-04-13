@@ -1,0 +1,118 @@
+<h1> {{title}} </h1>
+
+<pre>{{ UserDetails.errors | json }}</pre>
+
+<div class="container">
+<form  [formGroup]="UserDetails" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+       
+        <label>Name: </label>
+        <input type="text" placeholder="Enter your name" formControlName="name" class="form-control"> 
+
+        <div class="error" 
+        *ngIf="UserDetails.get('name').touched && UserDetails.get('name').hasError('required')">
+        Name is required 
+        </div>
+    
+        <div class="error"
+        *ngIf="UserDetails.get('name').touched && UserDetails.get('name').hasError('minlength')" >
+        Minimum length is 3 and Name is required
+        </div>
+
+    <div>
+
+        <label>ID: </label>
+        <input type="text" placeholder="Enter your ID" formControlName="ID" class="form-control">
+        <div class="error"
+        *ngIf="UserDetails.get('ID').touched && UserDetails.get('ID').hasError('required')">
+        Please enter your valid ID
+        </div>
+
+    </div>   
+
+
+
+<div>
+    <label>Phone number:</label>
+    <input type="text" formControlName="phone" placeholder="Enter your phone number" class="form-control">
+
+    <div class="error"
+        *ngIf= "UserDetails.get('phone').touched && UserDetails.get('phone').hasError('PhoneNumberInvalid')">
+         Please enter valid phone number of 10 digits along with your phone code 
+    </div>
+</div>
+
+<div>
+    <label>Mail ID: </label>
+    <input type="email" placeholder="Enter your mail ID" formControlName="emailID" class="form-control">
+
+    <div class="error"
+    *ngIf="UserDetails.get('emailID').touched && UserDetails.get('emailID').hasError('InvalidEmail')">
+    Please enter valid Email ID
+    </div>
+
+</div>
+
+</div>
+
+    <div formGroupName="address">
+
+        <div class="form-group">
+        <label>Street: </label>
+        <input type="text" placeholder="Enter your street" formControlName="street" class="form-control">
+            <div class="error" 
+            *ngIf="UserDetails.get('address').get('street').touched && UserDetails.get('address').get('street').hasError('required')">
+                Please enter your street name
+            </div>
+
+
+        <label>House No: </label>
+        <input type="number" placeholder="Enter your house no" formControlName="houseNo" class="form-control">
+        <div class="error" 
+        *ngIf="UserDetails.get('address').get('houseNo').touched && UserDetails.get('address').get('houseNo').hasError('required')">
+            Please enter your house or block no
+        </div>
+
+        <label>City: </label>
+        <input type="text" placeholder="Enter your city name" formControlName="city" class="form-control"> 
+        <div class="error" 
+        *ngIf="UserDetails.get('address').get('city').touched && UserDetails.get('address').get('city').hasError('required')">
+            Please enter your city name
+        </div>
+
+
+    <div class="row">
+        <div class="col-md-6">
+
+        <label>Create Password:</label>
+        <input type="password" formControlName="password" placeholder="Enter strong password" class="form-control">
+        <div class="error"
+        *ngIf="UserDetails.get('address').get('password').touched && UserDetails.get('address').get('password').hasError('InvalidPassword')">
+            Please create your password that contains of atleast one special character, one upper string, one lower string and of minimum 8 characters
+         </div> 
+
+        </div>    
+
+        <div class="col-md-6">
+            <label>Confirm Password:</label>
+            <input type="password" formControlName="confirmPassword" placeholder="Match the password" class="form-control">
+            <div class="error"
+            *ngIf="UserDetails.get('address').get('confirmPassword').touched && UserDetails.get('address').get('confirmPassword').hasError('InvalidMatchPassword')">
+                Please match your entered password with the created password
+             </div> 
+
+        </div> 
+
+    </div>
+        </div> 
+ 
+</div>
+
+<!-- <button type="submit" [disabled]="UserDetails.invalid">Submit</button> -->
+
+<button type="submit"  class="btn btn-primary">Sign up</button>
+
+</form>
+
+</div>
